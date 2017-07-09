@@ -331,7 +331,6 @@ const size_t LogMessage::kMaxLogMessageLen = 30000;
 
 struct LogMessage::LogMessageData  {
   LogMessageData();
-  void reset();
 
   int preserved_errno_;      // preserved errno
   // Buffer space; contains complete message text.
@@ -1156,10 +1155,6 @@ static GLOG_THREAD_LOCAL_STORAGE LogMessage::LogMessageData thread_msg_data;
 
 LogMessage::LogMessageData::LogMessageData()
   : stream_(message_text_, LogMessage::kMaxLogMessageLen, 0) {
-}
-
-void LogMessage::LogMessageData::reset() {
-    stream_.reset();
 }
 
 LogMessage::LogMessage(const char* file, int line, LogSeverity severity,

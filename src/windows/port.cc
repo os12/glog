@@ -54,13 +54,3 @@ int safe_vsnprintf(char *str, size_t size, const char *format, va_list ap) {
   str[size-1] = '\0';
   return _vsnprintf(str, size-1, format, ap);
 }
-
-#ifndef HAVE_SNPRINTF
-int snprintf(char *str, size_t size, const char *format, ...) {
-  va_list ap;
-  va_start(ap, format);
-  const int r = vsnprintf(str, size, format, ap);
-  va_end(ap);
-  return r;
-}
-#endif

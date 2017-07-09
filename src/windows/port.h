@@ -107,14 +107,6 @@ enum { STDIN_FILENO = 0, STDOUT_FILENO = 1, STDERR_FILENO = 2 };
 /* Sleep is in ms, on windows */
 #define sleep(secs)  Sleep((secs) * 1000)
 
-/* We can't just use _vsnprintf and _snprintf as drop-in-replacements,
- * because they don't always NUL-terminate. :-(  We also can't use the
- * name vsnprintf, since windows defines that (but not snprintf (!)).
- */
-#ifndef HAVE_SNPRINTF
-extern int GOOGLE_GLOG_DLL_DECL snprintf(char *str, size_t size,
-                                       const char *format, ...);
-#endif
 extern int GOOGLE_GLOG_DLL_DECL safe_vsnprintf(char *str, size_t size,
                           const char *format, va_list ap);
 #define vsnprintf(str, size, format, ap)  safe_vsnprintf(str, size, format, ap)
